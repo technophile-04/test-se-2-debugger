@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 import { generateTsAbis } from "./generateTsAbis.mjs";
-import { spawn } from "child_process";
+import { spawn, spawnSync } from "child_process";
+import fs from "fs";
 import path from "path";
 import { fileURLToPath } from "url";
 
@@ -11,8 +12,17 @@ const appDir = path.join(__dirname, "..");
 console.log("Initializing se-2-debugger...");
 
 const HARDHAT_ROOT_DIR = process.cwd();
-
 process.env.NEXT_PUBLIC_HARDHAT_ROOT = HARDHAT_ROOT_DIR;
+
+// Check if node_modules exists
+if (!fs.existsSync(path.join(appDir, "node_modules"))) {
+  console.log("Installing dependencies...");
+  const installProcess = spawnSync("yarn", ["install"], { cwd: appDir, stdio: "inherit" });
+  if (installProcess.error) {
+    console.error("Error installing dependencies:", installProcess.error);
+    process.exit(1);
+  }
+}
 
 generateTsAbis(HARDHAT_ROOT_DIR);
 
