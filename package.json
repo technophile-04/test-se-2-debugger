@@ -1,6 +1,5 @@
 {
   "name": "test-se-2-debugger",
-  "private": true,
   "version": "0.1.0",
   "bin": {
     "test-se-2-debugger": "./bin/se-2-debugger.mjs"
