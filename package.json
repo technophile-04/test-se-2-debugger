@@ -1,7 +1,11 @@
 {
-  "name": "@se-2/nextjs",
+  "name": "test-se-2-debugger",
   "private": true,
   "version": "0.1.0",
+  "bin": {
+    "test-se-2-debugger": "./bin/se-2-debugger.mjs"
+  },
+  "license": "MIT",
   "scripts": {
     "dev": "next dev",
     "start": "next dev",
